@@ -82,3 +82,6 @@ RUN <<EOT
     fi
     west update --narrow -o=--depth=1
 EOT
+
+ENTRYPOINT [ "nrfutil", "toolchain-manager", "launch", "/bin/bash", "--", "/root/entry.sh" ]
+COPY ./entry.sh /root/entry.sh
