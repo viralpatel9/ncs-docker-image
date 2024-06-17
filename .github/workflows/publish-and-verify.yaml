@@ -30,7 +30,7 @@ jobs:
       - name: Publish image
         run: |
           docker images
-          docker push viralpatel9/basic-c-app:${{ env.TAG }}
+          docker push viralpatel9/ncs-docker:${{ env.TAG }}
           
       - name: Ensure project builds
         run: |
