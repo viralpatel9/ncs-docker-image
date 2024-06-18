@@ -84,4 +84,4 @@ RUN <<EOT
 EOT
 
 ENTRYPOINT [ "nrfutil", "toolchain-manager", "launch", "/bin/bash", "--", "/root/entry.sh" ]
-COPY ./entry.sh /root/entry.sh
+CMD ["bash"]

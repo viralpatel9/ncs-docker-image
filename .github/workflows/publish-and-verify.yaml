@@ -3,7 +3,7 @@ name: Publish Docker
 on:
   push:
     branches:
-      - master
+      - local-build
 
 jobs:
   build:
