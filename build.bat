@@ -10,7 +10,7 @@ goto local_build
 echo Building using Docker
 
 cd
-docker run -t -v %cd%:/data -w /data viralpatel9/ncs-docker:master
+docker run -t -v %cd%:/data -w /data viralpatel9/ncs-docker:master build.sh
 goto eof
 
 :local_build
@@ -66,6 +66,12 @@ rem --------------------------------------------------------------
 
 rem Prepare
 call:Prepare
+
+rem Build V4x
+call:BuildOne "PCB V4x Debug",      PCB_V4X_Debug
+call:BuildOne "PCB V4x Production", PCB_V4X_Production
+
+@echo.
 
 goto:eof
 

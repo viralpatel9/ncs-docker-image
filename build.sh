@@ -22,8 +22,8 @@ function Prepare {
 	
 	cd /data
 
-        echo
-        echo "Build details:"	
+    echo
+    echo "Build details:"	
 	SCM_SHA_SHORT() { git rev-parse --short HEAD ; }      && echo "SHA Short: "    '"'$(SCM_SHA_SHORT)'"'
 	SCM_SHA_LONG()  { git rev-parse HEAD ; }              && echo "SHA Long:  "    '"'$(SCM_SHA_LONG)'"'
 	SCM_BRANCH()    { git rev-parse --abbrev-ref HEAD ; } && echo "Branch:    "    '"'$(SCM_BRANCH)'"'
@@ -59,6 +59,17 @@ function Prepare {
 	echo "Preparation complete. Error code is" $?
 }
 
+function Build {
+	echo "------------------------------------------------"
+	echo "Building the Test-example ----------------------"
+	echo "------------------------------------------------"
+	mkdir output
+	docker create --name test viralpatel9/ncs-docker:master
+	docker cp test-example/. test:
+	docker rm test
+	docker run --name test viralpatel9/ncs-docker:master west build --build-dir /output . -p always -b nrf52840dk_nrf52840 --no-sysbuild -- -DCONF_FILE=prj.conf
+}
 echo Starting build script
 Clean
 Prepare
+Build
