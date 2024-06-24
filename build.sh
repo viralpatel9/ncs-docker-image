@@ -5,8 +5,8 @@ function Clean {
     echo
     echo "Cheaning the folder prior to building................................"
 
-    rm -frd /builder
-    mkdir /builder
+    sudo rm -frd /builder
+    sudo mkdir /builder
 
     cd /data
 }
@@ -63,11 +63,13 @@ function Build {
 	echo "------------------------------------------------"
 	echo "Building the Test-example ----------------------"
 	echo "------------------------------------------------"
-	mkdir output
-	docker create --name test viralpatel9/ncs-docker:master
-	docker cp test-example/. test:
-	docker rm test
-	docker run --name test viralpatel9/ncs-docker:master west build --build-dir /output . -p always -b nrf52840dk_nrf52840 --no-sysbuild -- -DCONF_FILE=prj.conf
+	sudo mkdir /output
+	sudo docker create --name test viralpatel9/ncs-docker:master
+	cd test-example
+	sudo docker cp . test:/workdir/project
+	sudo docker rm test
+	sudo docker run --name test -v "${PWD}:/workdir/project" -w /workdir/project viralpatel9/ncs-docker:master west build . -- -p always -b nrf52840dk_nrf52840 --no-sysbuild -- -DCONF_FILE=prj.conf
+	
 }
 echo Starting build script
 Clean

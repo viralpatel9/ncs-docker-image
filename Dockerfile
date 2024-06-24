@@ -83,5 +83,5 @@ RUN <<EOT
     west update --narrow -o=--depth=1
 EOT
 
-ENTRYPOINT [ "nrfutil", "toolchain-manager", "launch", "/bin/bash", "--", "/root/entry.sh" ]
+ENTRYPOINT [ "nrfutil", "toolchain-manager", "launch"]
 CMD ["bash"]
