@@ -4,8 +4,8 @@ WORKDIR /workdir
 # Label
 LABEL MAINTAINER Viral Patel <viralp2121@gmail.com> Name=ncs-docker
 
-ARG sdk_nrf_branch=v2.6-branch
-ARG toolchain_version=v2.6.0
+ARG sdk_nrf_branch=v3.0-branch
+ARG toolchain_version=v3.0.2
 ARG sdk_nrf_commit
 ARG NORDIC_COMMAND_LINE_TOOLS_VERSION="10-24-0/nrf-command-line-tools-10.24.0"
 ARG arch=amd64
@@ -32,7 +32,7 @@ RUN wget -q https://developer.nordicsemi.com/.pc-tools/nrfutil/x64-linux/nrfutil
     mv nrfutil /usr/local/bin                                                           &&  \
     chmod +x /usr/local/bin/nrfutil                                                     &&  \
     nrfutil install toolchain-manager                                                   &&  \
-    nrfutil install toolchain-manager search                                            &&  \
+#    nrfutil install toolchain-manager search                                            &&  \
     nrfutil toolchain-manager install --ncs-version ${toolchain_version}                &&  \
     nrfutil toolchain-manager list                                                      &&  \
     rm -f /root/ncs/downloads/*         
